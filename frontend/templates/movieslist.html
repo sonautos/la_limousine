@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Netflix-home
+{% endblock title %}
+
+{% block others %}
+    
+{% endblock others %}  
+
+{% block content %}
+
+    {% include "partials/navbar.html" %}
+    <div class="container-fluid contenedor text-center bg-gray-50">
+        <h1 class="font-semibold text-4xl md:text-5xl w-10/12 md:w-3/4 mx-auto text-gray-900 p-5">
+            Selection de films pour vous! 
+        </h1>
+        <div class="bg-gray-50 bg-opacity-70 min-h-full py-8 px-4 w-10/12 mx-auto rounded-md">
+            <div class="flex justify-center items-center w-11/12 md:w-10/12 mx-auto pb-4">
+                <form method='POST' action="/recomovies/" class="w-full flex justify-center">
+                    {% csrf_token %}
+                    <input class="w-11/12" type="text" name="user" id="id_user" value="{{ user }}" hidden>
+                    <input list="browsers" id="browser_id" name="browser" placeholder="Starting typing the name of the browser" 
+                            class="md:py-5 py-3 px-2 placeholder-gray-700 rounded-l-lg outline-none  text-gray-900 border-4 bg-gray-100 block w-8/12 md:w-3/4"/>
+                    <datalist id="browsers">
+                        {% for id, res in all_list.items %}
+                            <option data-value="{{ id }}">{{res}}</option>
+                        {% endfor %}
+                    </datalist>
+                    <a href="" class='md:w-1/4'>
+                        <button class="bg-primary text-white font-medium md:font-normal flex justify-center items-center py-3 px-2 md:px-4 rounded-r-lg md:text-2xl">
+                            <span>
+                                Search
+                            </span>
+                            <ion-icon name="chevron-forward-outline" class="text-2xl"></ion-icon>
+                        </button>
+                    </a>
+                    {{form.errors}}
+                </form>
+            </div>
+
+            {% csrf_token %}
+            {% comment %} <input class="" type="password" name="password" id="id_bdate" value="{{ password }}" > {% endcomment %}
+                <div class="row">
+                    {% for id, res in reco_movies.items %}
+                        {% if forloop.counter < 43 %}
+                            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12 container_foto ">
+                                <a  href="/moviedetail/{{ res.result.id }}">
+                                    <img class=" h-80 rounded-3xl shadow-xl" src="{{ res.poster }}" alt="">
+                                    <div class="text-center text-gray-900 -mt-1">
+                                        <h4>{{ res.title }}</h4>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+        </div>
+        <script>
+            
+        </script>
+    </div>
+    
+{% endblock content %}

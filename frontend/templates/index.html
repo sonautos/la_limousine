@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Netflix-home
+{% endblock title %}
+
+{% block others %}
+    
+{% endblock others %}  
+
+{% block content %}
+
+    {% include "partials/navbar.html" %}
+    <header class="min-h-screen bg-black bg-opacity-75 showcase border-gray-600 border-b-8 flex justify-center items-center bg-no-repeat"  style="background-image: url('{% static 'background_netflix.jpg' %}');">
+        <div class="z-10 h-full py-32 md:py-0 text-gray-100 text-center flex items-center flex-col">
+            <h1 class="font-semibold text-4xl md:text-5xl w-10/12 md:w-3/4 text-center">
+                Des milliers de films au fin fond de la Creuse. 
+            </h1>
+            <h3 class="text-xl md:text-xl py-3">
+                Regardez n'importe où! Sans engagement. 
+            </h3>
+            <h1 class="text-red-600 font-semibold text-2xl md:text-2xl w-10/12 md:w-3/4 text-center">
+                Ready to watch? 
+            </h1>
+            <h4 class="text-sm md:text-lg pb-3">
+                Entrer votre email pour créer ou récupérer votre compte. 
+            </h4>
+            <form method='POST' action="/add_user/" class="w-full flex justify-center">
+                {% csrf_token %}
+                    <div class="flex justify-center items-center w-11/12 md:w-10/12">
+                        <input type="email" name="email" id="" placeholder="Email address" class="md:py-5 py-4 px-2 placeholder-gray-500 rounded-l-xl rounded-bl-sm outline-none  text-gray-900 bg-gray-50 block w-8/12 md:w-3/4">
+                        <a href="" class='md:w-1/4'>
+                        
+                            <button class="bg-primary_red text-white font-medium md:font-normal flex justify-center items-center py-4 px-3 md:px-5 rounded-r-xl md:text-2xl">
+                                <span>
+                                    Commencer
+                                </span>
+                                <ion-icon name="chevron-forward-outline" class="text-2xl"></ion-icon>
+                            </button>
+                        </a>
+                    </div>
+                {{form.errors}}
+            </form>
+        </div>
+    </header>
+    <div class="text-white bg-black">
+        <section class='flex flex-col text-white md:flex-row items-center border-gray-900 border-b-8' style="min-height: 70vh;">
+            <div class="md:w-1/2 flex flex-col justify-center text-center md:text-left p-5 md:p-10 ">
+                <h2 class="md:text-5xl text-4xl  font-semibold mb-4">
+                    Regardez La Limousine sur votre TV..
+                </h2>
+                <h5 class="md:text-xl text-lg">
+                    Regardez La Limousine sur votre Smart TV, PlayStation, Xbox, Chromecast, Apple TV, lecteurs Blu-ray et bien plus.
+                </h5>
+            </div>
+            <div class='md:w-1/2 flex justify-center items-center'>
+                <img src="{% static 'tv.png' %}" class="w-8/12" alt="">
+            </div>
+        </section>
+    
+        <section class='flex flex-col md:flex-row items-center border-gray-900 border-b-8' style="min-height: 70vh;">
+            <div class='md:w-1/2 flex justify-center items-center '>
+                <img src="{% static 'mobile-0819.jpg' %}" class="w-8/12" alt="">
+            </div>
+    
+            <div class="md:w-1/2 flex flex-col justify-center text-center md:text-left p-5 md:p-10">
+                <h2 class="md:text-5xl text-4xl font-semibold mb-4">
+                    Téléchargez vos films préférés pour les regarder hors connexion.
+                </h2>
+                <h5 class="md:text-xl text-lg">
+                    Enregistrez vos programmes préférés et ayez toujours quelque chose à regarder.
+                </h5>
+            </div>
+            
+        </section>
+    
+        {% comment %} <section class='flex flex-col md:flex-row items-center border-gray-900 border-b-8' style="min-height: 70vh;">
+            <div class="md:w-1/2 flex flex-col justify-center text-center md:text-left p-5 md:p-10">
+                <h2 class="md:text-5xl text-4xl font-semibold mb-4">
+                    Créez des profils pour les enfants.
+                </h2>
+                <h5 class="md:text-xl text-lg">
+                    Les enfants découvrent de nouvelles aventures et retrouvent leurs personnages préférés dans un espace bien à eux, déjà inclus dans votre abonnement.
+                </h5>
+            </div>
+            <div class='md:w-1/2 flex justify-center items-center'>
+                <img src="{% static 'netflix_kid.png' %}" class="w-8/12" alt="">
+            </div>
+        </section> {% endcomment %}
+        <footer class=" px-5 py-10 ">
+            <ul class="flex justify-between items-center">
+                
+                <li>&copy; 2022</li>
+                <li>People Project: Camille, Céline, Alex, François and Julien</li>
+                <li>By La Limousine</li>
+            </ul>
+        </footer>
+    </div>
+{% endblock content %}

@@ -1,0 +1,53 @@
+{% load static %}
+<nav class="flex text-gray-100 justify-between items-center py-3 px-2 fixed w-full z-50">
+    <div class="w-6/12">
+        <a href='/'>
+            <img src="{% static 'limousine.png' %}" alt="logo" class="w-2/12 md:w-2/12" style="width: 7vh">
+        </a>
+    </div>
+    {% comment %} <div class="flex justify-center items-center w-11/12 md:w-10/12 mx-auto p-5">
+        <form method='POST' action="/recomovies/" class="w-full flex justify-center">
+            {% csrf_token %}
+            <input class="w-11/12" type="text" name="user" id="id_user" value="{{ user }}" hidden>
+            <input list="browsers" id="browser_id" name="browser" placeholder="Starting typing the name of the browser" 
+            class="md:py-5 py-3 px-2 placeholder-gray-500 rounded-l-lg outline-none  text-gray-900 bg-gray-50 block w-8/12 md:w-3/4""/>
+            <datalist id="browsers">
+                {% for id, res in all_list.items %}
+                    <option data-value="{{ id }}">{{res}}</option>
+                {% endfor %}
+            </datalist>
+            <a href="" class='md:w-1/4'>
+                <button class="bg-primary text-white font-medium md:font-normal flex justify-center items-center py-3 px-2 md:px-4 rounded-r-lg md:text-2xl">
+                    <span>
+                        Search
+                    </span>
+                    <ion-icon name="chevron-forward-outline" class="text-2xl"></ion-icon>
+                </button>
+            </a>
+            <input class="w-11/12" type="text" name="user" id="id_user" value="{{ user }}" hidden>
+            {{form.errors}}
+        </form>
+    </div> {% endcomment %}
+
+    {% comment %} {% if AUTH != 'false'  %}
+        {% if request.user.is_authenticated %}
+        <div>
+        <form action="{% url 'account_logout' %}" method="post">
+            {% csrf_token %}
+            <button class='bg-primary_red py-1 px-3 text-white md:text-lg rounded-md'>
+                Logout
+            </button>
+        </form>
+        </div>
+        {% else %}
+        <div>
+        <a href="{% url 'account_login' %}">
+
+            <button class='bg-primary_red py-1 px-3 text-white md:text-lg rounded-md'>
+                Sign In 
+            </button>
+        </a>
+        </div>
+        {% endif %}
+    {% endif %} {% endcomment %}
+</nav>

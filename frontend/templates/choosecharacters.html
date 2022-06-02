@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    La Limousine - Choose Movies
+{% endblock title %}
+
+{% block others %}
+{% endblock others %}  
+
+{% block content %}
+
+    {% include "partials/navbar.html" %}
+    <div class="container-fluid contenedor text-center">
+        <h1 class="font-semibold text-4xl md:text-5xl w-10/12 md:w-3/4 mx-auto text-gray-900 p-5">
+            Sélectionnez au moins 3 personalités 
+        </h1>
+        <form method='POST' class="bg-white bg-opacity-70 min-h-full py-8 px-4 w-10/12 mx-auto rounded-md" action="/movieslist/">
+            {% csrf_token %}
+            <input class="w-11/12" type="text" name="user" id="id_user" value="{{ user }}" hidden>
+            {% comment %} <input class="" type="password" name="password" id="id_bdate" value="{{ password }}" > {% endcomment %}
+            <div class="row">
+                <div class="row">
+                    {% for nconst, res in persons.items %}
+                        {% if forloop.counter < 61 %}
+                            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12 container_foto ">
+                                <img class=" h-80 rounded-3xl shadow-2xl" src="https://image.tmdb.org/t/p/original/{{ res.profile_path }}"" alt="">
+                                <div class="text-center text-gray-900 -mt-4">
+                                    <input class="-mt-7" type="checkbox" name="id" id="id_name" value="{{ id }}"/>
+                                    <h4>{{ res.name }}</h4>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="flex justify-center items-center pt-5">
+                <button class="py-2 px-4 bg-primary_red text-gray-100 font-medium text-lg rounded-md">
+                    Confirmer
+                </button>
+            </div>
+        </form>
+        
+    </div>
+
+
+{% endblock%}

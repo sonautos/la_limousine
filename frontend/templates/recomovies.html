@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Netflix-home
+{% endblock title %}
+
+{% block others %}
+    
+{% endblock others %}  
+
+{% block content %}
+
+    {% include "partials/navbar.html" %}
+    <div class="container-fluid text-center bg-gray-5">
+        {% for id, res in movie.items %}
+        <div class="inline-flex">
+          </div>
+        <div class="flex mx-auto w-11/12 rounded-3xl pt-3">
+            <img class="w-full shadow-2xl rounded-3xl" src="https://image.tmdb.org/t/p/original{{res.result.backdrop_path}}" alt="" height="600">
+        </div>
+        <h1 class="text-white -mt-96 font-semibold text-4xl md:text-5xl w-10/12 md:w-3/4 mx-auto">
+            Vous avez choisi <span class="text-blue-100 border-l-black">{{ title }}</span>, nous vous conseillons donc :  
+        </h1>
+        {% endfor %}
+        <div class="bg-gray-5 min-h-full py-8 px-4 w-10/12 mx-auto rounded-md">
+            <div class="flex justify-center items-center w-11/12 md:w-10/12 mx-auto p-5">
+                <form method='POST' action="/recomovies/" class="w-full flex justify-center">
+                    {% csrf_token %}
+                    <input class="w-11/12" type="text" name="user" id="id_user" value="{{ user }}" hidden>
+                    <input list="browsers" id="browser_id" name="browser" placeholder="Starting typing the name of the browser" 
+                    class="md:py-5 py-3 px-2 placeholder-gray-500 rounded-l-lg outline-none  text-gray-900 bg-gray-50 block w-8/12 md:w-3/4""/>
+                    <datalist id="browsers">
+                        {% for id, res in all_list.items %}
+                            <option data-value="{{ id }}">{{res}}</option>
+                        {% endfor %}
+                    </datalist>
+                    <a href="" class='md:w-1/4'>
+                        <button class="bg-primary text-white font-medium md:font-normal flex justify-center items-center py-3 px-2 md:px-4 rounded-r-lg md:text-2xl">
+                            <span>
+                                Search
+                            </span>
+                            <ion-icon name="chevron-forward-outline" class="text-2xl"></ion-icon>
+                        </button>
+                    </a>
+                    <input class="w-11/12" type="text" name="user" id="id_user" value="{{ user }}" hidden>
+                    {{form.errors}}
+                </form>
+            </div>
+
+            
+            <form method='POST' action="/movieslist/" class="w-full flex justify-center">
+                {% csrf_token %}
+                <input class="w-11/12" type="text" name="user" id="id_user" value="{{ user }}" hidden>
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg">
+                    Retour
+                </button>
+            </form>
+            
+            <div class="row">
+                {% for id, res in reco_movies.items %}
+                    {% if forloop.counter < 33 %}
+                    <div class="py-10 sm:max-w-xl sm:mx-auto">
+                        <a  href="/moviedetail/{{ res.result.id }}">
+                        <div class="h-80 bg-purple-100 shadow-2xl border-gray-100 max-h-80 border sm:rounded-3xl p-8 flex space-x-8">
+                            <div class="h-48 overflow-visible w-1/2">
+                                <img class="-mt-14 rounded-3xl shadow-lg" src="{{ res.poster }}" alt="">
+                            </div>
+                            <div class="flex flex-col w-1/2 space-y-4">
+                                <div class="flex justify-between items-start">
+                                <h2 class="text-3xl font-bold">{{ res.title }}</h2>
+                                <div class="bg-yellow-400 font-bold rounded-xl p-2">{{res.result.vote_average}}</div>
+                                </div>
+                                <p class=" text-gray-900 max-h-40 overflow-y-hidden">{{res.overview|slice:180 }}...</p>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            </div>
+        </div>
+        <script>
+        </script>
+    </div>
+    
+{% endblock content %}
