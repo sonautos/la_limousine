@@ -7,7 +7,7 @@ The project consists in cleaning a database of more than 7,000,000 films (IMDB),
 ## Installation
 
 1. download zip
-2. create a virtual environment: 
+2. create a virtual environment: \
     `virtualenv venv` \
     `source venv/bin/activate`
 3. install all modules\
